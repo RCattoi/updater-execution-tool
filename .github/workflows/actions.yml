@@ -31,7 +31,7 @@ jobs:
         with:
           version: 'latest'
           project_id: 'execution-tool-op'
-          service_account_key: keyfile.json
+          service_account_key: 'keyfile.json'
 
       - name: execute py script # run main.py
         env:
