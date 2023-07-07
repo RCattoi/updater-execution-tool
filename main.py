@@ -28,7 +28,7 @@ def sendDataToBigQuery(url, worksheet, destinationTable, cancelServices=False, r
     databaseSheet = databaseSheet.drop(columns=[''])
     databaseSheet = databaseSheet.astype(str)
     databaseSheet.to_gbq(destination_table=destinationTable,
-                         project_id='execution-tool-op', if_exists='replace')
+                         project_id='execution-tool-op', if_exists='replace', credentials=credentials)
 
 
 new_names = {
