@@ -22,19 +22,16 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           
+      - name: Create auth file
+        run: |
+          echo "${{ secrets.GCLOUDTOKEN }}" > keyfile.json
+
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v0.2.1
         with:
           version: 'latest'
           project_id: 'execution-tool-op'
-
-      - name: Authenticate with Google Cloud
-        run: |
-          echo "${{ secrets.GCLOUDTOKEN }}" > keyfile.json
-          gcloud auth activate-service-account --key-file=keyfile.json
-      
-      - name: Configure PROJECT
-        run: gcloud config set project execution-tool-op
+          service_account_key: keyfile.json
 
       - name: execute py script # run main.py
         env:
