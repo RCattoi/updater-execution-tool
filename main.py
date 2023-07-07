@@ -2,13 +2,16 @@ import gspread
 from google.oauth2.service_account import Credentials
 import pandas as pd
 import os
+import json
 
+token_content = json.loads(os.environ['UPDATERTOKEN'])
 
-UPDATERTOKEN = os.environ['UPDATERTOKEN']
+with open('token.json', 'w') as file:
+    json.dump(token_content, file)
 
 scope = ['https://spreadsheets.google.com/feeds',
          'https://www.googleapis.com/auth/drive']
-credentials = Credentials.from_service_account_file(UPDATERTOKEN, scopes=scope)
+credentials = Credentials.from_service_account_file('token.json', scopes=scope)
 client = gspread.authorize(credentials)
 
 
