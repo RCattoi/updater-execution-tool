@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: checkout repo content
-        uses: actions/checkout@v2 # checkout the repository content to github runner
+      - name: checkout Code
+        uses: actions/checkout@v3 # checkout the repository content to github runner
 
       - name: setup python
         uses: actions/setup-python@v4
@@ -22,6 +22,18 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0.2.1
+        with:
+          version: 'latest'
+          project_id: 'execution-tool-op'
+
+      - name: Authenticate with Google Cloud
+        run: gcloud auth activate-service-account --key-file=${{ secrets.GCLOUDTOKEN }}
+      
+      - name: Configure PROJECT
+        run: gcloud config set project execution-tool-op
+
       - name: execute py script # run main.py
         env:
           UPDATERTOKEN: ${{ secrets.UPDATERTOKEN }}
