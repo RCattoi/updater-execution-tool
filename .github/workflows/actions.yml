@@ -25,9 +25,9 @@ jobs:
           
       - name: Create auth file
         run: |
-          echo "${{ secrets.GCLOUDTOKEN }}" > keyfile.json
+          echo "${{ secrets.UPDATERTOKEN }}" > keyfile.json
           echo keyfile.json
-          
+
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v0.2.1
         with:
