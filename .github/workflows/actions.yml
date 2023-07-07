@@ -1,8 +1,9 @@
 name: run main.py
 
 on:
-  schedule:
-    - cron: '*/5 * * * *' # At every 5th minute
+  workflow_dispatch:
+  # schedule:
+  #   - cron: '*/5 * * * *' # At every 5th minute
 
 jobs:
   build:
@@ -31,7 +32,7 @@ jobs:
         with:
           version: 'latest'
           project_id: 'execution-tool-op'
-          service_account_key: 'keyfile.json'
+          service_account_key: keyfile.json
 
       - name: execute py script # run main.py
         env:
