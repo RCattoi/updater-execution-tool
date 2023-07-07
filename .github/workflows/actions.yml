@@ -28,8 +28,8 @@ jobs:
           version: 'latest'
           project_id: 'execution-tool-op'
 
-      - name: Authenticate with Google Cloud
-        run: gcloud auth activate-service-account --key-file=${{ secrets.GCLOUDTOKEN }}
+      # - name: Authenticate with Google Cloud
+      #   run: gcloud auth activate-service-account --key-file=${{ secrets.GCLOUDTOKEN }}
       
       - name: Configure PROJECT
         run: gcloud config set project execution-tool-op
