@@ -1,0 +1,13 @@
+pandas @ file:///C:/ci/pandas_1618365634936/work
+pandas-gbq==0.19.2
+google-api-core==2.11.1
+google-auth==2.21.0
+google-auth-httplib2==0.1.0
+google-auth-oauthlib==1.0.0
+google-cloud-bigquery==3.11.3
+google-cloud-bigquery-storage==2.22.0
+google-cloud-core==2.3.3
+google-crc32c==1.5.0
+google-resumable-media==2.5.0
+googleapis-common-protos==1.59.1
+gspread @ file:///home/conda/feedstock_root/build_artifacts/gspread_1654069834893/work
