@@ -25,7 +25,6 @@ def sendDataToBigQuery(url, worksheet, destinationTable, cancelServices=False, r
     if renameColumns:
         databaseSheet = changeColumnName(destinationTable, databaseSheet)
 
-    databaseSheet = databaseSheet.drop(columns=[''])
     databaseSheet = databaseSheet.astype(str)
     databaseSheet.to_gbq(destination_table=destinationTable,
                          project_id='execution-tool-op', if_exists='replace', credentials=credentials)
@@ -47,6 +46,7 @@ def changeColumnName(destinationTable, df):
             'PEDIDO ÚNICO': 'pedido_uncio',
             'multa acumulada': 'multa_acumulada',
         }
+        df = df.drop(columns=[''])
     elif destinationTable == 'dashboards.flightRefund':
         new_names = {
             'Data ': 'date',
