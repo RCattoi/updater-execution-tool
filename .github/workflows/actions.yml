@@ -17,8 +17,17 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.9' # install the python version needed
-          
-      - name: install python packages
+
+      - name: Cache Python libraries
+      id: cache
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
@@ -29,6 +38,13 @@ jobs:
           version: 'latest'
           project_id: 'execution-tool-op'
           service_account_key: ${{ secrets.UPDATERTOKEN }}
+
+
+      - name: Save Python libraries cache
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/.cache/pip
+          cp -a ${{ runner.workspace }}/. ~/.cache/pip
 
       - name: execute py script # run main.py
         env:
