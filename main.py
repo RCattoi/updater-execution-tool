@@ -32,7 +32,7 @@ def sendDataToBigQuery(url, worksheet, destinationTable, cancelServices=False, r
 
 
 def changeColumnName(destinationTable, df):
-
+    new_names = {}
     if destinationTable == 'dashboards.tutelas':
         new_names = {
             'DATA FATAL ': 'data_fatal',
