@@ -23,7 +23,7 @@ def sendDataToBigQuery(url, worksheet, destinationTable, cancelServices=False, r
         databaseSheet['isServicesCancellationSelected'] = True
 
     if renameColumns:
-        databaseSheet = changeColumnName(databaseSheet, renameColumns)
+        databaseSheet = changeColumnName(worksheet, databaseSheet)
 
     databaseSheet = databaseSheet.drop(columns=[''])
     databaseSheet = databaseSheet.astype(str)
