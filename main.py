@@ -32,8 +32,8 @@ def sendDataToBigQuery(url, worksheet, destinationTable, cancelServices=False, r
     databaseSheet = changeColumnValue(databaseSheet)
 
     databaseSheet = databaseSheet.astype(str)
-    # databaseSheet.to_gbq(destination_table=destinationTable,
-    #                      project_id='execution-tool-op', if_exists='replace', credentials=credentials)
+    databaseSheet.to_gbq(destination_table=destinationTable,
+                         project_id='execution-tool-op', if_exists='replace', credentials=credentials)
 
 
 def changeColumnName(destinationTable, df):
