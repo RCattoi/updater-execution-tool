@@ -3,6 +3,10 @@ from google.oauth2.service_account import Credentials
 import pandas as pd
 import os
 import json
+import numpy as np
+
+from columnParser import *
+
 
 token_content = json.loads(os.environ['UPDATERTOKEN'])
 
@@ -25,9 +29,11 @@ def sendDataToBigQuery(url, worksheet, destinationTable, cancelServices=False, r
     if renameColumns:
         databaseSheet = changeColumnName(destinationTable, databaseSheet)
 
+    databaseSheet = changeColumnValue(databaseSheet)
+
     databaseSheet = databaseSheet.astype(str)
-    databaseSheet.to_gbq(destination_table=destinationTable,
-                         project_id='execution-tool-op', if_exists='replace', credentials=credentials)
+    # databaseSheet.to_gbq(destination_table=destinationTable,
+    #                      project_id='execution-tool-op', if_exists='replace', credentials=credentials)
 
 
 def changeColumnName(destinationTable, df):
@@ -108,8 +114,8 @@ sendDataToBigQuery('https://docs.google.com/spreadsheets/d/19gFL6vA90oSCrhBZcLE0
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1siIH4e16AOmXmk0ZfZo_pDPefPzXcilnmSWs7BQ9tBs/edit#gid=0',
                    'Reembolsos', 'dashboards.ReembolsosOP')
 
-sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1WQxAOmBRCJX3d_6Thra-UkdTaMLdjsL7f8NBwT6yilc/edit#gid=1241935875',
-                   'Ação Reembolso_Relatório', 'dashboards.flightRefund', renameColumns=True)
+# sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1WQxAOmBRCJX3d_6Thra-UkdTaMLdjsL7f8NBwT6yilc/edit#gid=1241935875',
+#                    'Ação Reembolso_Relatório', 'dashboards.flightRefund', renameColumns=True)
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1h9z1_pg3jxLh0lleoPK0Ekhp8gObd-REZOvhAns9l3I/edit#gid=1623972009',
                    'Cancelamento Terrestre', 'dashboards.SuspensionAction', renameColumns=True)
