@@ -1,3 +1,6 @@
+import numpy as np
+
+
 def correctSyntax(value):
 
     if type(value) == int:
