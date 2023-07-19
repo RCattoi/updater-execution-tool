@@ -47,8 +47,7 @@ def changeColumnValue(df):
     vectorizeCorrectSyntax = np.vectorize(correctSyntax)
     vectorizeCurrencyToNumber = np.vectorize(currencyToNumber)
 
-    listOfColumns = ['operation_id', 'order_id',
-                     'air_ticket', 'cancellation_ticket']
+    listOfColumns = ['operation_id', 'order_id', 'OrderIds', 'air_ticket', 'cancellation_ticket', 'ticket_number']
 
     for (colname, colval) in df.items():
         if colname in listOfColumns:
