@@ -99,8 +99,37 @@ def changeColumnName(destinationTable, df):
             'Multa':	'FeeValue',
             'obsMulta': 'FeeObservation'
         }
+
+    elif destinationTable == 'dashboards.SuspensionActionBrokers':
+        new_names = {
+            'Data da inclusão': 'InclusionDateBRT',
+            'Pedido': 'OrderIds',
+            'Id Operação': 'operation_id',
+            'Estabelecimento': 'establishment_name',
+            'reservation_code': 'reservation_code',
+            'hotel_name': 'hotel_name',
+            'sku': 'sku',
+            'reservation_type': 'reservation_type',
+            'Embarque': 'TravelStartDateBRT',
+            'Retorno': 'ReturnDateBRT',
+            'sso_id': 'sso_id',
+            'Nome': 'full_name',
+            'E-mail': 'email',
+            'Telefone': 'phoneNumber',
+            'Cia aérea': 'airline',
+            'Localizador': 'tracker',
+            'Aéreo Cancel.': 'isAirTravelCancelled',
+            'Operadores | Aéreo': 'airTravelOperator',
+            'Tkt da tratativa': 'ticket_number',
+            'Data da tratativa': 'ActionDateBRT',
+            'É tutela?': 'isGuardinship',
+            'Terrestre. Cancel.': 'isTerrestrialCancelled',
+            'Operadores | Terrestre': 'terrestrialOperator',
+            'OBS':'observation',
+            'Bloqueio': 'BlockType',
+        }
     
-    elif destinationTable == 'dashboards.terrestrialRelocations':
+    elif destinationTable in ['dashboards.terrestrialRelocations', 'dashboards.terrestrialRelocationsBrokers']:
         new_names = {																	
             'Data de inclusão': 'InclusionDateBRT',
             'Código da reserva': 'reservation_code',
@@ -145,3 +174,9 @@ sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1VisZixBLVxS6v4imHZ8n
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1h9z1_pg3jxLh0lleoPK0Ekhp8gObd-REZOvhAns9l3I/edit#gid=1623972009',
                    'Cancelamento Terrestre', 'dashboards.SuspensionAction', renameColumns=True)
+
+sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1SmNuANsRk-DFESW-MQjVkRMll9L9VsJFlt5958ASeGQ/edit#gid=0',
+                    'Cancelamento Broker', 'dashboards.SuspensionActionBrokers', renameColumns=True)
+
+sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1VisZixBLVxS6v4imHZ8nf3E0a6Zsq1tg3SuMKJnScD8/edit#gid=572309135',
+                   'Realocações Brokers', 'dashboards.TerrestrialRelocationsBrokers', renameColumns=True)
