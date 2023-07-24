@@ -6,6 +6,9 @@ import json
 import numpy as np
 from columnParser import *
 
+f = open('queries.json')
+queries = json.load(f)
+
 token_content = json.loads(os.environ['UPDATERTOKEN'])
 
 with open('token.json', 'w') as file:
@@ -16,8 +19,6 @@ scope = ['https://spreadsheets.google.com/feeds',
 credentials = Credentials.from_service_account_file('token.json', scopes=scope)
 client = gspread.authorize(credentials)
 
-f = open('queries.json')
-queries = json.load(f)
 tableNames = list(queries.keys())
 sqlCodes = list(queries.values())
 
