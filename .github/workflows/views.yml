@@ -1,0 +1,51 @@
+name: run updateViews.py
+
+on:
+  workflow_dispatch: # trigger the job manually
+  schedule:
+    - cron: '0 5 * * *' # At every day at 5AM
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: checkout Code
+        uses: actions/checkout@v3 # checkout the repository content to github runner
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9' # install the python version needed
+
+      - name: Cache Python libraries
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.pythonLocation }}
+          key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('dev-requirements.txt') }}
+
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Set up Google Cloud SDK # google authentication with GCP
+        uses: google-github-actions/setup-gcloud@v0.2.1
+        with:
+          version: 'latest'
+          project_id: 'execution-tool-op'
+          service_account_key: ${{ secrets.UPDATERTOKEN }}
+
+
+      - name: Save Python libraries cache # save dependencies in cache
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/.cache/pip
+          cp -a ${{ runner.workspace }}/. ~/.cache/pip
+
+      - name: execute py script # run main.py
+        env:
+          UPDATERTOKEN: ${{ secrets.UPDATERTOKEN }}
+        run: python updateViews.py
