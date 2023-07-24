@@ -8,7 +8,7 @@ from columnParser import *
 
 f = open('queries.json')
 queries = json.load(f)
-
+print(queries)
 token_content = json.loads(os.environ['UPDATERTOKEN'])
 
 with open('token.json', 'w') as file:
