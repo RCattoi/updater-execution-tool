@@ -129,8 +129,31 @@ def changeColumnName(destinationTable, df):
             'Bloqueio': 'BlockType',
         }
     
-    elif destinationTable in ['dashboards.terrestrialRelocations', 'dashboards.terrestrialRelocationsBrokers']:
-        new_names = {																	
+    elif destinationTable == 'dashboards.TerrestrialRelocationsBrokers':
+        new_names = {
+            'Data de inclusão': 'InclusionDateBRT',
+            'Código da reserva': 'reservation_code',
+            'Hotel': 'hotel_name',
+            'Broker': 'broker',
+            'Check-in':	'Checkin',
+            'Check-out': 'Checkout',
+            'PAX':	'OrderPeopleNotCancelled',
+            'Quartos reservados': 'RoomsBooked',
+            'Tipo de reserva': 'ReservationType',
+            'ID Pedido': 'OrderIds',
+            'ID Operação':	'operation_id',
+            'Tipo de destino':	'DestinationType',
+            'Cidade do hotel':	'city_name',
+            'Novo estabelecimento': 'new_establishment_name',
+            'Status do pedido': 'order_status_name',
+            'Data de tratativa (DD/MM/AAAA)': 'ActionDateBRT',
+            'Colaborador':	'operator_name',
+            'Custo realocação': 'realocation_price',
+            'Moeda': 'currency',
+            'Ticket da tratativa':	'ticket_number',
+            'Observações':	'observations'}
+    elif destinationTable == 'dashboards.terrestrialRelocations':
+        new_names ={
             'Data de inclusão': 'InclusionDateBRT',
             'Código da reserva': 'reservation_code',
             'Hotel': 'hotel_name',
@@ -139,17 +162,16 @@ def changeColumnName(destinationTable, df):
             'PAX':	'OrderPeopleNotCancelled',
             'Quartos reservados': 'RoomsBooked',
             'Tipo de reserva': 'ReservationType',
-            'ID Pedido' : 'OrderIds',
-            'ID Operação' :	'operation_id',
-            'Tipo de destino' :	'DestinationType',
-            'Cidade do hotel' :	'city_name',
-            'Novo estabelecimento' : 'new_establishment_name',
-            'Status do pedido' : 'order_status_name',
-            'Data de tratativa (DD/MM/AAAA)' : 'ActionDateBRT',
-            'Colaborador' :	'operator_name',
-            'Ticket da tratativa' :	'ticket_number',
-            'Observações' :	'observations'
-        }
+            'ID Pedido': 'OrderIds',
+            'ID Operação':	'operation_id',
+            'Tipo de destino':	'DestinationType',
+            'Cidade do hotel':	'city_name',
+            'Novo estabelecimento': 'new_establishment_name',
+            'Status do pedido': 'order_status_name',
+            'Data de tratativa (DD/MM/AAAA)': 'ActionDateBRT',
+            'Colaborador':	'operator_name',
+            'Ticket da tratativa':	'ticket_number',
+            'Observações':	'observations'}
         
     return df.rename(columns=new_names)
 
