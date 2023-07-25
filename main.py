@@ -118,19 +118,19 @@ def changeColumnName(destinationTable, df):
             'Telefone': 'phoneNumber',
             'Cia aérea': 'airline',
             'Localizador': 'tracker',
-            'Aéreo Cancel.': 'isAirTravelCancelled',
+            'Aéreo Cancel. ': 'isAirTravelCancelled',
             'Operadores | Aéreo': 'airTravelOperator',
             'Tkt da tratativa': 'ticket_number',
             'Data da tratativa': 'ActionDateBRT',
             'É tutela?': 'isGuardinship',
             'Terrestre. Cancel.': 'isTerrestrialCancelled',
             'Operadores | Terrestre': 'terrestrialOperator',
-            'OBS':'observation',
+            'OBS': 'observation',
             'Bloqueio': 'BlockType',
         }
-    
+
     elif destinationTable in ['dashboards.terrestrialRelocations', 'dashboards.terrestrialRelocationsBrokers']:
-        new_names = {																	
+        new_names = {
             'Data de inclusão': 'InclusionDateBRT',
             'Código da reserva': 'reservation_code',
             'Hotel': 'hotel_name',
@@ -139,18 +139,18 @@ def changeColumnName(destinationTable, df):
             'PAX':	'OrderPeopleNotCancelled',
             'Quartos reservados': 'RoomsBooked',
             'Tipo de reserva': 'ReservationType',
-            'ID Pedido' : 'OrderIds',
-            'ID Operação' :	'operation_id',
-            'Tipo de destino' :	'DestinationType',
-            'Cidade do hotel' :	'city_name',
-            'Novo estabelecimento' : 'new_establishment_name',
-            'Status do pedido' : 'order_status_name',
-            'Data de tratativa (DD/MM/AAAA)' : 'ActionDateBRT',
-            'Colaborador' :	'operator_name',
-            'Ticket da tratativa' :	'ticket_number',
-            'Observações' :	'observations'
+            'ID Pedido': 'OrderIds',
+            'ID Operação':	'operation_id',
+            'Tipo de destino':	'DestinationType',
+            'Cidade do hotel':	'city_name',
+            'Novo estabelecimento': 'new_establishment_name',
+            'Status do pedido': 'order_status_name',
+            'Data de tratativa (DD/MM/AAAA)': 'ActionDateBRT',
+            'Colaborador':	'operator_name',
+            'Ticket da tratativa':	'ticket_number',
+            'Observações':	'observations'
         }
-        
+
     return df.rename(columns=new_names)
 
 
@@ -167,16 +167,16 @@ sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1siIH4e16AOmXmk0ZfZo_
                    'Reembolsos', 'dashboards.ReembolsosOP')
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1WQxAOmBRCJX3d_6Thra-UkdTaMLdjsL7f8NBwT6yilc/edit#gid=1241935875',
-                    'Ação Reembolso_Relatório', 'dashboards.flightRefund', renameColumns=True)
+                   'Ação Reembolso_Relatório', 'dashboards.flightRefund', renameColumns=True)
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1VisZixBLVxS6v4imHZ8nf3E0a6Zsq1tg3SuMKJnScD8/edit#gid=572309135',
-                    'Realocações', 'dashboards.terrestrialRelocations', renameColumns=True)
+                   'Realocações', 'dashboards.terrestrialRelocations', renameColumns=True)
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1h9z1_pg3jxLh0lleoPK0Ekhp8gObd-REZOvhAns9l3I/edit#gid=1623972009',
                    'Cancelamento Terrestre', 'dashboards.SuspensionAction', renameColumns=True)
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1SmNuANsRk-DFESW-MQjVkRMll9L9VsJFlt5958ASeGQ/edit#gid=0',
-                    'Cancelamento Broker', 'dashboards.SuspensionActionBrokers', renameColumns=True)
+                   'Cancelamento Broker', 'dashboards.SuspensionActionBrokers', renameColumns=True)
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1VisZixBLVxS6v4imHZ8nf3E0a6Zsq1tg3SuMKJnScD8/edit#gid=572309135',
                    'Realocações Brokers', 'dashboards.TerrestrialRelocationsBrokers', renameColumns=True)
