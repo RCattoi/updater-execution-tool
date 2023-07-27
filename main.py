@@ -125,10 +125,10 @@ def changeColumnName(destinationTable, df):
             'É tutela?': 'isGuardinship',
             'Terrestre. Cancel.': 'isTerrestrialCancelled',
             'Operadores | Terrestre': 'terrestrialOperator',
-            'OBS':'observation',
+            'OBS': 'observation',
             'Bloqueio': 'BlockType',
         }
-    
+
     elif destinationTable == 'dashboards.TerrestrialRelocationsBrokers':
         new_names = {
             'Data de inclusão': 'InclusionDateBRT',
@@ -153,7 +153,7 @@ def changeColumnName(destinationTable, df):
             'Ticket da tratativa':	'ticket_number',
             'Observações':	'observations'}
     elif destinationTable == 'dashboards.terrestrialRelocations':
-        new_names ={
+        new_names = {
             'Data de inclusão': 'InclusionDateBRT',
             'Código da reserva': 'reservation_code',
             'Hotel': 'hotel_name',
@@ -172,7 +172,7 @@ def changeColumnName(destinationTable, df):
             'Colaborador':	'operator_name',
             'Ticket da tratativa':	'ticket_number',
             'Observações':	'observations'}
-        
+
     return df.rename(columns=new_names)
 
 
@@ -189,16 +189,19 @@ sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1siIH4e16AOmXmk0ZfZo_
                    'Reembolsos', 'dashboards.ReembolsosOP')
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1WQxAOmBRCJX3d_6Thra-UkdTaMLdjsL7f8NBwT6yilc/edit#gid=1241935875',
-                    'Ação Reembolso_Relatório', 'dashboards.flightRefund', renameColumns=True)
+                   'Ação Reembolso_Relatório', 'dashboards.flightRefund', renameColumns=True)
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1VisZixBLVxS6v4imHZ8nf3E0a6Zsq1tg3SuMKJnScD8/edit#gid=572309135',
-                    'Realocações', 'dashboards.terrestrialRelocations', renameColumns=True)
+                   'Realocações', 'dashboards.terrestrialRelocations', renameColumns=True)
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1h9z1_pg3jxLh0lleoPK0Ekhp8gObd-REZOvhAns9l3I/edit#gid=1623972009',
                    'Cancelamento Terrestre', 'dashboards.SuspensionAction', renameColumns=True)
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1SmNuANsRk-DFESW-MQjVkRMll9L9VsJFlt5958ASeGQ/edit#gid=0',
-                    'Cancelamento Broker', 'dashboards.SuspensionActionBrokers', renameColumns=True)
+                   'Cancelamento Broker', 'dashboards.SuspensionActionBrokers', renameColumns=True)
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1VisZixBLVxS6v4imHZ8nf3E0a6Zsq1tg3SuMKJnScD8/edit#gid=572309135',
                    'Realocações Brokers', 'dashboards.TerrestrialRelocationsBrokers', renameColumns=True)
+
+sendDataToBigQuery('https://docs.google.com/spreadsheets/d/13xvUmO3jFxo2qZBTWjmz6YKypN2n-ROIdC2Ayr-hIxk/edit#gid=0',
+                   '0. Operações', 'dashboards.terrestial_actions', renameColumns=True)
