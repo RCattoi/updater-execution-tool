@@ -205,3 +205,9 @@ sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1VisZixBLVxS6v4imHZ8n
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/13xvUmO3jFxo2qZBTWjmz6YKypN2n-ROIdC2Ayr-hIxk/edit#gid=0',
                    '0. Operações', 'dashboards.terrestial_actions', renameColumns=True)
+
+sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1tQzWUJJLHIehMibgq7ChP5iKbMzouvrgEa4yFeEbxwA/edit#gid=0',
+                   '1. Base Completa', 'dashboards.AcaoDataFixa')
+
+sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1yvWt3zYnRc8cYQU_E-vSKotpxbpqlc7pXxPrdluKFsA/edit#gid=14679476',
+                   'data', 'dashboards.desfazerFlightOptionsSent')
