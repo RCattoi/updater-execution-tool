@@ -1,8 +1,8 @@
 import gspread
 from google.oauth2.service_account import Credentials
-from google.cloud import bigquery
 import pandas as pd
 import os
+import pandas.io as pdio
 import json
 import numpy as np
 
@@ -221,9 +221,9 @@ sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1yvWt3zYnRc8cYQU_E-vS
 tableNames = list(data.keys())
 sqlCodes = list(data.values())
 
-client = bigquery.Client(project='bi-data-science')
 
 for tn in range(len(tableNames)):
-    query_data = client.query(sqlCodes[tn]).to_dataframe()
+    query_data = pdio.io.gbq.read_gbq(
+        query=sqlCodes[tn], project_id="execution-tool-op", dialect='standard')
     query_data.to_gbq(destination_table='views.' +
                       tableNames[tn], project_id='execution-tool-op', if_exists='replace')
