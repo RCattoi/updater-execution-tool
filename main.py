@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+from google.cloud import bigquery
 import pandas as pd
 import os
 import json
@@ -9,9 +10,13 @@ from columnParser import *
 
 
 token_content = json.loads(os.environ['UPDATERTOKEN'])
+queies_data = json.loads('queries.json')
 
 with open('token.json', 'w') as file:
     json.dump(token_content, file)
+
+with open('queries.json', 'r') as file:
+    data = json.load(file)
 
 scope = ['https://spreadsheets.google.com/feeds',
          'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/bigquery']
@@ -211,3 +216,14 @@ sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1tQzWUJJLHIehMibgq7Ch
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1yvWt3zYnRc8cYQU_E-vSKotpxbpqlc7pXxPrdluKFsA/edit#gid=14679476',
                    'data', 'dashboards.desfazerFlightOptionsSent')
+
+
+tableNames = list(data.keys())
+sqlCodes = list(data.values())
+
+client = bigquery.Client(project='bi-data-science')
+
+for tn in range(len(tableNames)):
+    query_data = client.query(sqlCodes[tn]).to_dataframe()
+    query_data.to_gbq(destination_table='views.' +
+                      tableNames[tn], project_id='execution-tool-op', if_exists='replace')
