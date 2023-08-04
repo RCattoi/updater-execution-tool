@@ -9,7 +9,6 @@ from columnParser import *
 
 
 token_content = json.loads(os.environ['UPDATERTOKEN'])
-queies_data = json.loads('queries.json')
 
 with open('token.json', 'w') as file:
     json.dump(token_content, file)
