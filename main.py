@@ -2,7 +2,6 @@ import gspread
 from google.oauth2.service_account import Credentials
 import pandas as pd
 import os
-import pandas.io as pdio
 import json
 import numpy as np
 
@@ -223,7 +222,7 @@ sqlCodes = list(data.values())
 
 
 for tn in range(len(tableNames)):
-    query_data = pdio.io.gbq.read_gbq(
+    query_data = pd.read_gbq(
         query=sqlCodes[tn], project_id="execution-tool-op", dialect='standard')
     query_data.to_gbq(destination_table='views.' +
                       tableNames[tn], project_id='execution-tool-op', if_exists='replace')
