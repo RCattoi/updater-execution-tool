@@ -211,3 +211,6 @@ sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1tQzWUJJLHIehMibgq7Ch
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1yvWt3zYnRc8cYQU_E-vSKotpxbpqlc7pXxPrdluKFsA/edit#gid=14679476',
                    'data', 'dashboards.desfazerFlightOptionsSent')
+
+sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1VxWXQencxg8xXTNgktlV6gCS4_PgrJQUCC0pKK2k2yI/edit#gid=97811125',
+                   'Dados', 'dashboards.emissions_database')
