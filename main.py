@@ -32,6 +32,7 @@ def sendDataToBigQuery(url, worksheet, destinationTable, cancelServices=False, r
     databaseSheet = changeColumnValue(databaseSheet)
 
     databaseSheet = databaseSheet.astype(str)
+
     databaseSheet.to_gbq(destination_table=destinationTable,
                          project_id='execution-tool-op', if_exists='replace', credentials=credentials)
 
@@ -152,6 +153,7 @@ def changeColumnName(destinationTable, df):
             'Moeda': 'currency',
             'Ticket da tratativa':	'ticket_number',
             'Observações':	'observations'}
+
     elif destinationTable == 'dashboards.terrestrialRelocations':
         new_names = {
             'Data de inclusão': 'InclusionDateBRT',
@@ -171,7 +173,9 @@ def changeColumnName(destinationTable, df):
             'Data de tratativa (DD/MM/AAAA)': 'ActionDateBRT',
             'Colaborador':	'operator_name',
             'Ticket da tratativa':	'ticket_number',
-            'Observações':	'observations'},
+            'Observações':	'observations'
+            }
+        
     elif destinationTable == 'teste.otj':
         new_names ={
             'Pedido':'order_id',
