@@ -223,4 +223,4 @@ sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1VxWXQencxg8xXTNgktlV
                    'Dados', 'dashboards.emissions_database')
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1_J1lTIaaShREY1GZvi7yIejTmn6qeYwKB5SOiFj6OPg/edit#gid=1636581253',
-                   'Form Responses 1', 'teste.otj',renameColumns=True)
+                   'Form Responses 1', 'teste.otj', renameColumns=True)
