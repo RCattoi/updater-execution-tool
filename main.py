@@ -183,6 +183,9 @@ def changeColumnName(destinationTable, df):
     return df.rename(columns=new_names)
 
 
+sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1_J1lTIaaShREY1GZvi7yIejTmn6qeYwKB5SOiFj6OPg/edit#gid=1636581253',
+                   'Form Responses 1', 'teste.otj', renameColumns=True)
+
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1ZI07h13_w_kNmFyPuVyVC7MksTxTZ0t4dlAib7suzFA/edit#gid=670717809',
                    'Geral', 'dashboards.tutelas', renameColumns=True)
 
@@ -221,6 +224,3 @@ sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1yvWt3zYnRc8cYQU_E-vS
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1VxWXQencxg8xXTNgktlV6gCS4_PgrJQUCC0pKK2k2yI/edit#gid=97811125',
                    'Dados', 'dashboards.emissions_database')
-
-sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1_J1lTIaaShREY1GZvi7yIejTmn6qeYwKB5SOiFj6OPg/edit#gid=1636581253',
-                   'Form Responses 1', 'teste.otj', renameColumns=True)
