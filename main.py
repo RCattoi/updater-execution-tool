@@ -171,7 +171,14 @@ def changeColumnName(destinationTable, df):
             'Data de tratativa (DD/MM/AAAA)': 'ActionDateBRT',
             'Colaborador':	'operator_name',
             'Ticket da tratativa':	'ticket_number',
-            'Observações':	'observations'}
+            'Observações':	'observations'},
+    elif destinationTable == 'teste.otj':
+        new_names ={
+            'Pedido':'order_id',
+            'Nome de usuário':'agent_email',
+            'Status Pré-Operação':'operation_status',
+            'Tipo de Operação':'operation_type'
+        }
 
     return df.rename(columns=new_names)
 
@@ -214,3 +221,6 @@ sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1yvWt3zYnRc8cYQU_E-vS
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1VxWXQencxg8xXTNgktlV6gCS4_PgrJQUCC0pKK2k2yI/edit#gid=97811125',
                    'Dados', 'dashboards.emissions_database')
+
+sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1_J1lTIaaShREY1GZvi7yIejTmn6qeYwKB5SOiFj6OPg/edit#gid=1636581253',
+                   'Form Responses 1', 'teste.otj')
