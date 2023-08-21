@@ -174,21 +174,21 @@ def changeColumnName(destinationTable, df):
             'Colaborador':	'operator_name',
             'Ticket da tratativa':	'ticket_number',
             'Observações':	'observations'
-            }
-        
+        }
+
     elif destinationTable == 'teste.otj':
-        new_names ={
-            'Pedido':'order_id',
-            'Nome de usuário':'agent_email',
-            'Status Pré-Operação':'operation_status',
-            'Tipo de Operação':'operation_type'
+        new_names = {
+            'Pedido': 'order_id',
+            'Nome de usuário': 'agent_email',
+            'Status Pré-Operação': 'operation_status',
+            'Tipo de Operação': 'operation_type'
         }
 
     return df.rename(columns=new_names)
 
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1_J1lTIaaShREY1GZvi7yIejTmn6qeYwKB5SOiFj6OPg/edit#gid=1636581253',
-                   'Form Responses 1', 'teste.otj', renameColumns=True)
+                   'Form Responses 1', 'dashboards.preOperation', renameColumns=True)
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1ZI07h13_w_kNmFyPuVyVC7MksTxTZ0t4dlAib7suzFA/edit#gid=670717809',
                    'Geral', 'dashboards.tutelas', renameColumns=True)
