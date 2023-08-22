@@ -178,6 +178,7 @@ def changeColumnName(destinationTable, df):
 
     elif destinationTable == 'teste.otj':
         new_names = {
+            'Timestamp': 'data',
             'Pedido': 'order_id',
             'Nome de usuário': 'agent_email',
             'Status Pré-Operação': 'operation_status',
