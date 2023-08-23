@@ -176,7 +176,7 @@ def changeColumnName(destinationTable, df):
             'Observações':	'observations'
         }
 
-    elif destinationTable == 'teste.otj':
+    elif destinationTable == 'dashboards.preOperation':
         new_names = {
             'Timestamp': 'data',
             'Pedido': 'order_id',
