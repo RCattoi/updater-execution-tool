@@ -188,6 +188,9 @@ def changeColumnName(destinationTable, df):
     return df.rename(columns=new_names)
 
 
+sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1emQFsP14Ttom4tiqpXzYP2rsCxIKZ-JYlK-RA4xwXvE/edit#gid=0',
+                   'Sheet1', 'dashboards.productivityCheckpoint')
+
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1_J1lTIaaShREY1GZvi7yIejTmn6qeYwKB5SOiFj6OPg/edit#gid=1636581253',
                    'Form Responses 1', 'dashboards.preOperation', renameColumns=True)
 
