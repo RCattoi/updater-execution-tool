@@ -6,7 +6,7 @@ import json
 import numpy as np
 
 from columnParser import *
-from zendeskProd import *
+from zendeskProductivity import *
 
 
 token_content = json.loads(os.environ['UPDATERTOKEN'])
