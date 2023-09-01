@@ -19,7 +19,7 @@ scope = ['https://spreadsheets.google.com/feeds',
 credentials = Credentials.from_service_account_file('token.json', scopes=scope)
 client = gspread.authorize(credentials)
 
-print(zendeskProductivity())
+zendeskProductivity()
 
 # def sendDataToBigQuery(url, worksheet, destinationTable, cancelServices=False, renameColumns=False):
 #     sheet = client.open_by_url(url)
