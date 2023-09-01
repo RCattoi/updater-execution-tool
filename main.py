@@ -6,6 +6,7 @@ import json
 import numpy as np
 
 from columnParser import *
+from zendeskProd import *
 
 
 token_content = json.loads(os.environ['UPDATERTOKEN'])
@@ -18,7 +19,7 @@ scope = ['https://spreadsheets.google.com/feeds',
 credentials = Credentials.from_service_account_file('token.json', scopes=scope)
 client = gspread.authorize(credentials)
 
-
+zendeskProductivity()
 def sendDataToBigQuery(url, worksheet, destinationTable, cancelServices=False, renameColumns=False):
     sheet = client.open_by_url(url)
     databaseSheet = pd.DataFrame(sheet.worksheet(worksheet).get_all_records())
