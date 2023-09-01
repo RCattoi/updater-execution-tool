@@ -6,6 +6,7 @@ import json
 import numpy as np
 
 from columnParser import *
+from zendeskProductivity import *
 
 
 token_content = json.loads(os.environ['UPDATERTOKEN'])
@@ -17,6 +18,8 @@ scope = ['https://spreadsheets.google.com/feeds',
          'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/bigquery']
 credentials = Credentials.from_service_account_file('token.json', scopes=scope)
 client = gspread.authorize(credentials)
+
+zendeskProductivity()
 
 
 def sendDataToBigQuery(url, worksheet, destinationTable, cancelServices=False, renameColumns=False):
@@ -35,6 +38,8 @@ def sendDataToBigQuery(url, worksheet, destinationTable, cancelServices=False, r
 
     databaseSheet.to_gbq(destination_table=destinationTable,
                          project_id='execution-tool-op', if_exists='replace', credentials=credentials)
+
+    print(f"Update for {destinationTable} completed")
 
 
 def changeColumnName(destinationTable, df):
