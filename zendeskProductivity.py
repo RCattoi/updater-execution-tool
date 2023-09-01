@@ -36,11 +36,13 @@ def zendeskProductivity():
     concatedDF = pd.concat([databaseSheet, dataQueryDF], ignore_index=True)
     concatedDF = concatedDF.astype(str)
     concatedDF = concatedDF.drop_duplicates()
-    concatedDF.to_gbq(destination_table='dashboards.productivityOpZendesk',
-                      project_id='execution-tool-op', if_exists='replace')
 
-    sheet = gc.open_by_url(
-        "https://docs.google.com/spreadsheets/d/1HnynDTuKWzU7ITvVTLTO6PzU-QVNuZ4fuU0LZ0z0c7E/edit#gid=1387845271")
-    sheet.values_clear("productivity!A2:D")
+    if(len(concatedDF) and len(dataQueryDF) and len(databaseSheet)):
+        concatedDF.to_gbq(destination_table='dashboards.productivityOpZendesk',
+                          project_id='execution-tool-op', if_exists='replace')
 
-    print("Update for Zendeskproductivity Table completed")
+        sheet = gc.open_by_url(
+            "https://docs.google.com/spreadsheets/d/1HnynDTuKWzU7ITvVTLTO6PzU-QVNuZ4fuU0LZ0z0c7E/edit#gid=1387845271")
+        sheet.values_clear("productivity!A2:D")
+
+        print("Update for Zendeskproductivity Table completed")
