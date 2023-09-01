@@ -46,4 +46,4 @@ jobs:
       - name: execute py script # run main.py
         env:
           UPDATERTOKEN: ${{ secrets.UPDATERTOKEN }}
-        run: python zendeskProd.py
+        run: python main.py
