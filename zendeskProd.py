@@ -7,30 +7,38 @@ from google.cloud import bigquery
 
 
 def zendeskProductivity():
-  def query():
-    return f'''
+    def query():
+        return f'''
   SELECT *
   FROM `execution-tool-op.dashboards.ReembolsosOP` otj
   '''
 
-  dataQuery = query()
-  user = bigquery.Client(project='execution-tool-op')
-  dataQueryDF = user.query(dataQuery).to_dataframe()
+    dataQuery = query()
+    user = bigquery.Client(project='execution-tool-op')
+    dataQueryDF = user.query(dataQuery).to_dataframe()
 
+    token_content = json.loads(os.environ['UPDATERTOKEN'])
 
+    with open('token.json', 'w') as file:
+        json.dump(token_content, file)
 
-  token_content = json.loads(os.environ['UPDATERTOKEN'])
+    scope = ['https://spreadsheets.google.com/feeds',
+             'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/bigquery']
+    credentials = Credentials.from_service_account_file(
+        'token.json', scopes=scope)
+    gc = gspread.authorize(credentials)
 
-  with open('token.json', 'w') as file:
-      json.dump(token_content, file)
+    sheet = gc.open_by_url(
+        "https://docs.google.com/spreadsheets/d/1HnynDTuKWzU7ITvVTLTO6PzU-QVNuZ4fuU0LZ0z0c7E/edit#gid=1387845271")
+    databaseSheet = pd.DataFrame(
+        sheet.worksheet('productivity').get_all_records())
 
-  scope = ['https://spreadsheets.google.com/feeds',
-          'https://www.googleapis.com/auth/drive', 'https://www.googleapis.com/auth/bigquery']
-  credentials = Credentials.from_service_account_file('token.json', scopes=scope)
-  gc = gspread.authorize(credentials)
+    concatedDF = pd.concat([databaseSheet, dataQueryDF], ignore_index=True)
+    concatedDF = concatedDF.drop_duplicates()
+    concatedDF = concatedDF.astype(str)
+    concatedDF.to_gbq(destination_table='dashboards.productivityOpZendesk',
+                      project_id='execution-tool-op', if_exists='replace')
 
-    
-  sheet = gc.open_by_url("https://docs.google.com/spreadsheets/d/1HnynDTuKWzU7ITvVTLTO6PzU-QVNuZ4fuU0LZ0z0c7E/edit#gid=1387845271")
-  databaseSheet = pd.DataFrame(sheet.worksheet('productivity').get_all_records())
-  print(databaseSheet)
-  return databaseSheet
+    sheet = gc.open_by_url(
+        "https://docs.google.com/spreadsheets/d/1HnynDTuKWzU7ITvVTLTO6PzU-QVNuZ4fuU0LZ0z0c7E/edit#gid=1387845271")
+    sheet.values_clear("productivity!A2:D")
