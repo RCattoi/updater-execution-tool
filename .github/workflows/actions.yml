@@ -37,6 +37,12 @@ jobs:
           project_id: 'execution-tool-op'
           service_account_key: ${{ secrets.UPDATERTOKEN }}
 
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: 'execution-tool-op'
+          service_account_key: ${{ secrets.UPDATERTOKEN }}
+          export_default_credentials: true
       - name: Save Python libraries cache # save dependencies in cache
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
