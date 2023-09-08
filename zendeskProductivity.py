@@ -43,6 +43,6 @@ def zendeskProductivity():
 
         sheet = gc.open_by_url(
             "https://docs.google.com/spreadsheets/d/1HnynDTuKWzU7ITvVTLTO6PzU-QVNuZ4fuU0LZ0z0c7E/edit#gid=1387845271")
-        sheet.values_clear("productivity!A2:D")
+        sheet.values_clear("productivity!A2:E")
 
         print("Update for Zendeskproductivity Table completed")
