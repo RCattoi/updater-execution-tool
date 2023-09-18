@@ -7,6 +7,7 @@ import numpy as np
 
 from columnParser import *
 from zendeskProductivity import *
+from productivityCheckpoint import *
 
 
 token_content = json.loads(os.environ['UPDATERTOKEN'])
@@ -20,6 +21,7 @@ credentials = Credentials.from_service_account_file('token.json', scopes=scope)
 client = gspread.authorize(credentials)
 
 zendeskProductivity()
+productivityCheckpoint()
 
 
 def sendDataToBigQuery(url, worksheet, destinationTable, cancelServices=False, renameColumns=False):
@@ -192,9 +194,6 @@ def changeColumnName(destinationTable, df):
 
     return df.rename(columns=new_names)
 
-
-sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1emQFsP14Ttom4tiqpXzYP2rsCxIKZ-JYlK-RA4xwXvE/edit#gid=0',
-                   'Sheet1', 'dashboards.productivityCheckpoint')
 
 sendDataToBigQuery('https://docs.google.com/spreadsheets/d/1_J1lTIaaShREY1GZvi7yIejTmn6qeYwKB5SOiFj6OPg/edit#gid=1636581253',
                    'Form Responses 1', 'dashboards.preOperation', renameColumns=True)
